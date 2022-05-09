@@ -54,9 +54,9 @@ class Application:
             master, text="Peças faltantes: 6", font=MEDIUMFONT)
         piecesLeft2.place(relx=0.93, rely=0.5, anchor=CENTER)
 
-        piecesLeft2 = Button(
+        restart = Button(
             master, text="Reiniciar partida", font=MEDIUMFONT, command=self.reiniciarPartida)
-        piecesLeft2.place(relx=0.9, rely=0.05, anchor=CENTER)
+        restart.place(relx=0.9, rely=0.05, anchor=CENTER)
 
         for i in range(5):
             for j in range(5):
