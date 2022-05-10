@@ -5,29 +5,29 @@ LARGEFONT = ("Verdana", 35)
 MEDIUMFONT = ("Verdana", 12)
 
 MATRIZ_VISUALIZACAO = [
+    [X, X, 1, X, X],
     [X, 1, 2, 3, X],
-    [X, X, 2, 3, X],
+    [1, 2, 3, 4, 5],
     [X, 1, 2, 3, X],
-    [X, X, 2, 3, X],
-    [X, 1, 2, 3, X]
+    [X, X, 1, X, X]
 ]
 
 CASAS_POSSIVEIS_PAR = [1, 2, 3]
 CASAS_POSSIVEIS_IMPAR = [2, 3]
 
-POSICOES_INICIAIS_VERMELHO = [[4, 3], [3, 3], [2, 3], [1, 3]]
-POSICOES_INICIAIS_AZUL = [[0, 1], [3, 2], [2, 1], [1, 2]]
+POSICOES_INICIAIS_VERMELHO = [[1, 2], [2, 4], [1, 3], [2, 3]]
+POSICOES_INICIAIS_AZUL = [[2, 0], [3, 1], [2, 1], [3, 2]]
 
 
 class Application:
     def __init__(self, master=None):
-        self.iniciarJogo()
+        # self.iniciarJogo()
         self.jogador1 = PhotoImage(file=f"jogador1.png")
         self.jogador2 = PhotoImage(file=f"jogador2.png")
         self.casaTabuleiro = PhotoImage(file=f"peça.png")
         self.pinoVermelho = PhotoImage(file=f"pinoVermelho.png")
         self.pinoAzul = PhotoImage(file=f"pinoAzul.png")
-        self.tabuleiro = Frame(master, width=500, height=450)
+        self.tabuleiro = Frame(master, width=600, height=550)
         self.tabuleiro.place(relx=0.5, rely=0.5, anchor=CENTER)
         turn = Label(master, text="Vez de: Jogador 1", font=LARGEFONT)
         turn.place(relx=0.5, rely=0.05, anchor=CENTER)
@@ -60,52 +60,29 @@ class Application:
 
         for i in range(5):
             for j in range(5):
-                if (i % 2) == 0:
-                    if (j in CASAS_POSSIVEIS_PAR):
-                        if [i, j] in POSICOES_INICIAIS_AZUL:
-                            peca = Label(self.tabuleiro,
-                                         image=self.pinoAzul)
-                            peca.place(x=52 * j + 120, y=50 * i + 81)
-                            peca.bind("<Button-1>",
-                                      lambda e: self.casaClicada())
-                            peca.image = self.pinoAzul
-                        elif [i, j] in POSICOES_INICIAIS_VERMELHO:
-                            peca = Label(self.tabuleiro,
-                                         image=self.pinoVermelho)
-                            peca.place(x=52 * j + 120, y=50 * i + 81)
-                            peca.bind("<Button-1>",
-                                      lambda e: self.casaClicada())
-                            peca.image = self.pinoVermelho
-                        else:
-                            peca = Label(self.tabuleiro,
-                                         image=self.casaTabuleiro)
-                            peca.place(x=52 * j + 120, y=50 * i + 81)
-                            peca.bind("<Button-1>",
-                                      lambda e: self.casaClicada())
-                            peca.image = self.casaTabuleiro
-                else:
-                    if (j in CASAS_POSSIVEIS_IMPAR):
-                        if [i, j] in POSICOES_INICIAIS_AZUL:
-                            peca = Label(self.tabuleiro, image=self.pinoAzul)
-                            peca.place(x=50 * j + 98, y=50 * i + 80)
-                            peca.bind("<Button-1>",
-                                      lambda e: self.casaClicada())
-                            peca.image = self.pinoAzul
-                        elif [i, j] in POSICOES_INICIAIS_VERMELHO:
-                            peca = Label(self.tabuleiro,
-                                         image=self.pinoVermelho)
-                            peca.place(x=50 * j + 98, y=50 * i + 80)
-                            peca.bind("<Button-1>",
-                                      lambda e: self.casaClicada())
-                            peca.image = self.pinoVermelho
-                        else:
-                            peca = Label(self.tabuleiro,
-                                         image=self.casaTabuleiro)
-                            peca.place(x=50 * j + 98, y=50 * i + 80)
-                            peca.bind("<Button-1>",
-                                      lambda e: self.casaClicada())
-                            peca.image = self.casaTabuleiro
-                        peca = Label(self.tabuleiro, image=self.casaTabuleiro)
+                if MATRIZ_VISUALIZACAO[i][j] != X:
+                    if [i, j] in POSICOES_INICIAIS_AZUL:
+                        peca = Label(self.tabuleiro,
+                                     image=self.pinoAzul)
+                        peca.place(x=80 * j + 100, y=80 * i + 120)
+                        peca.bind("<Button-1>",
+                                  lambda e: self.casaClicada())
+                        peca.image = self.pinoAzul
+                    elif [i, j] in POSICOES_INICIAIS_VERMELHO:
+                        peca = Label(self.tabuleiro,
+                                     image=self.pinoVermelho)
+                        peca.place(x=80 * j + 100, y=80 * i + 120)
+                        peca.bind("<Button-1>",
+                                  lambda e: self.casaClicada())
+                        peca.image = self.pinoVermelho
+                    else:
+                        peca = Label(self.tabuleiro,
+                                     image=self.casaTabuleiro)
+                        peca.place(x=80 * j + 100, y=80 * i + 120)
+                        peca.bind("<Button-1>",
+                                  lambda e: self.casaClicada())
+                        peca.image = self.casaTabuleiro
+                    peca = Label(self.tabuleiro, image=self.casaTabuleiro)
 
     def iniciarJogo(self):
         messagebox.showinfo("showinfo", "Bem vindo ao QUEAH! Boa diversão :)")
