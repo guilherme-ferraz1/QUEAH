@@ -22,11 +22,11 @@ POSICOES_INICIAIS_AZUL = [[2, 0], [3, 1], [2, 1], [3, 2]]
 class Application:
     def __init__(self, master=None):
         # self.iniciarJogo()
-        self.jogador1 = PhotoImage(file=f"jogador1.png")
-        self.jogador2 = PhotoImage(file=f"jogador2.png")
-        self.casaTabuleiro = PhotoImage(file=f"peça.png")
-        self.pinoVermelho = PhotoImage(file=f"pinoVermelho.png")
-        self.pinoAzul = PhotoImage(file=f"pinoAzul.png")
+        self.jogador1 = PhotoImage(file=f"images/jogador1.png")
+        self.jogador2 = PhotoImage(file=f"images/jogador2.png")
+        self.casaTabuleiro = PhotoImage(file=f"images/peça.png")
+        self.pinoVermelho = PhotoImage(file=f"images/pinoVermelho.png")
+        self.pinoAzul = PhotoImage(file=f"images/pinoAzul.png")
         self.tabuleiro = Frame(master, width=600, height=550)
         self.tabuleiro.place(relx=0.5, rely=0.5, anchor=CENTER)
         turn = Label(master, text="Vez de: Jogador 1", font=LARGEFONT)

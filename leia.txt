@@ -1,2 +1,2 @@
 Para executar:
-python QUEAH.py
+python3 QUEAH.py
