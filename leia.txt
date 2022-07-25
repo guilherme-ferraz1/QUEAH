@@ -1,2 +1,2 @@
 Para executar:
-python3 QUEAH.py
+python3 PlayerInterface.py
