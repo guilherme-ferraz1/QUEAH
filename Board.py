@@ -241,9 +241,9 @@ class Board:
     
     def validarReserva(self, player: int, posicao: Location):
         if player == 1:
-            return self.player1.getReservas() > 0 and self.positions[posicao.getLine()][posicao.getColumn()].getStatus() == 'RESERVA_1'
+            return self.player1.getReservas() > 0 and self.player1.piecesOnBoard < 4 and self.positions[posicao.getLine()][posicao.getColumn()].getStatus() == 'RESERVA_1'
         if player == 2:
-            return self.player2.getReservas() > 0 and self.positions[posicao.getLine()][posicao.getColumn()].getStatus() == 'RESERVA_2'
+            return self.player2.getReservas() > 0 and self.player2.piecesOnBoard < 4 and self.positions[posicao.getLine()][posicao.getColumn()].getStatus() == 'RESERVA_2'
 
     def verificarVencedor(self) -> bool:
         pecasOpositor = self.getUserPecasOponentes()
