@@ -51,7 +51,7 @@ class PlayerInterface:
             self.board.limparPosicoesSelecionadas()
             posicaoDestinoValida = self.board.validarSeVazio(posicao)
             if posicaoDestinoValida == False:
-                messagebox.showinfo("showinfo", "Movimento irregular 1")
+                messagebox.showinfo("showinfo", "Movimento irregular")
             else:
                 self.board.adicionarPeca(posicao)
                 self.board.passarTurno()
@@ -70,13 +70,13 @@ class PlayerInterface:
                 self.board.clickTabuleiro(posicao)
                 posicaoValida = self.board.validarPosicao(self.board.selectedLocation)
                 if posicaoValida == False:
-                    messagebox.showinfo("showinfo", "Movimento irregular 2")
+                    messagebox.showinfo("showinfo", "Movimento irregular")
                     self.board.limparPosicoesSelecionadas()
             else:
                 self.board.clickTabuleiro(posicao)
                 posicaoDestinoValida = self.board.validarPosicaoDestino(self.board.selectedLocation, self.board.selectedDestiny)
                 if posicaoDestinoValida == False:
-                    messagebox.showinfo("showinfo", "Movimento irregular 3")
+                    messagebox.showinfo("showinfo", "Movimento irregular")
                     self.board.limparPosicoesSelecionadas()
                 else:
                     isVazio = self.board.validarSeVazio(self.board.selectedDestiny)
@@ -88,12 +88,12 @@ class PlayerInterface:
                     else:
                         isInimigo = self.board.verificarSeInimigo(self.board.selectedDestiny)
                         if isInimigo == False:
-                            messagebox.showinfo("showinfo", "Movimento irregular 4")
+                            messagebox.showinfo("showinfo", "Movimento irregular")
                             self.board.limparPosicoesSelecionadas()
                         else:
                             isSeguinteVazia = self.board.posicaoSeguinteIsVazia(self.board.selectedLocation, self.board.selectedDestiny)
                             if isSeguinteVazia == False:
-                                messagebox.showinfo("showinfo", "Movimento irregular 5")
+                                messagebox.showinfo("showinfo", "Movimento irregular")
                                 self.board.limparPosicoesSelecionadas()
                             else:
                                 self.board.removerPeca(self.board.selectedLocation)
@@ -106,6 +106,7 @@ class PlayerInterface:
                     if temVencedor == True:
                         self.iniciarInterfaceUsuario()
                         return
+                    self.atualizaInterface()
 
     def clickReservas(self, linha, coluna):
         # CASO DE USO ADICIONAR PEÇA
@@ -163,7 +164,7 @@ class PlayerInterface:
         turn = Label(None, text=("Vez de: Jogador " + str(self.board.turnPlayer)), font=LARGEFONT)
         turn.place(relx=0.5, rely=0.05, anchor=CENTER)
     
-        piecesLeft1 = Label(None, text="Peças reservas: " + str(self.board.player1.piecesReserved), font=MEDIUMFONT)
+        piecesLeft1 = Label(None, text="Peças reservas: " + str(self.board.player1.getReservas()), font=MEDIUMFONT)
         piecesLeft1.place(relx=0.07, rely=0.5, anchor=CENTER)
 
         piecesLeft2 = Label(None, text="Peças reservas: " + str(self.board.player2.getReservas()), font=MEDIUMFONT)
