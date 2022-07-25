@@ -4,6 +4,7 @@ from tkinter import messagebox
 from Location import Location
 from Player import Player
 from Position import Position
+from Status import Status
 
 class Board:
     def __init__(self):
@@ -45,12 +46,12 @@ class Board:
     def verificarSeInimigo(self, selectedDestiny: Location) -> bool:
         turno1 = self.player1.turn == True
         if (turno1):
-            if self.positions[selectedDestiny.getLine()][selectedDestiny.getColumn()].getStatus() == 'OCUPADA_2':
+            if self.positions[selectedDestiny.getLine()][selectedDestiny.getColumn()].getStatus() == Status.OCUPADA_2.name:
                 return True
             else:
                 return False
         else:
-            if self.positions[selectedDestiny.getLine()][selectedDestiny.getColumn()].getStatus() == 'OCUPADA_1':
+            if self.positions[selectedDestiny.getLine()][selectedDestiny.getColumn()].getStatus() == Status.OCUPADA_1.name:
                 return True
             else:
                 return False
@@ -100,12 +101,12 @@ class Board:
 
     def validarPosicao(self, selectedLocation: Location) -> bool:
         if self.turnPlayer == 1:
-            if self.positions[selectedLocation.getLine()][selectedLocation.getColumn()].getStatus() == 'OCUPADA_1':
+            if self.positions[selectedLocation.getLine()][selectedLocation.getColumn()].getStatus() == Status.OCUPADA_1.name:
                 return True
             else:
                 return False
         if self.turnPlayer == 2:
-            if self.positions[selectedLocation.getLine()][selectedLocation.getColumn()].getStatus() == 'OCUPADA_2':
+            if self.positions[selectedLocation.getLine()][selectedLocation.getColumn()].getStatus() == Status.OCUPADA_2.name:
                 return True
             else:
                 return False
@@ -146,14 +147,14 @@ class Board:
         colunaPosicaoDestino = selectedDestiny.getColumn()
         if linhaPosicao == linhaPosicaoDestino:
             if colunaPosicao + 1 == colunaPosicaoDestino:
-                return self.positions[linhaPosicaoDestino][colunaPosicaoDestino + 1].getStatus() == 'LIVRE'
+                return self.positions[linhaPosicaoDestino][colunaPosicaoDestino + 1].getStatus() == Status.LIVRE.name
             if colunaPosicao - 1 == colunaPosicaoDestino:
-                return self.positions[linhaPosicaoDestino][colunaPosicaoDestino - 1].getStatus() == 'LIVRE'
+                return self.positions[linhaPosicaoDestino][colunaPosicaoDestino - 1].getStatus() == Status.LIVRE.name
         if colunaPosicao == colunaPosicaoDestino:
             if linhaPosicao + 1 == linhaPosicaoDestino:
-                return self.positions[linhaPosicaoDestino + 1][colunaPosicaoDestino].getStatus() == 'LIVRE'
+                return self.positions[linhaPosicaoDestino + 1][colunaPosicaoDestino].getStatus() == Status.LIVRE.name
             if linhaPosicao - 1 == linhaPosicaoDestino:
-                return self.positions[linhaPosicaoDestino - 1][colunaPosicaoDestino].getStatus() == 'LIVRE'
+                return self.positions[linhaPosicaoDestino - 1][colunaPosicaoDestino].getStatus() == Status.LIVRE.name
         return False
 
     def verificarBloqueioMovimento(self) -> bool:
@@ -161,44 +162,44 @@ class Board:
             for j in range(5):
                 if self.turnPlayer == 2:
                     if self.positions[i][j].getStatus() == 'OCUPADA_1':
-                        if self.positions[i][j + 1].getStatus() == 'LIVRE':
+                        if self.positions[i][j + 1].getStatus() == Status.LIVRE.name:
                             return False
-                        if self.positions[i][j - 1].getStatus() == 'LIVRE' and j != 0:
+                        if self.positions[i][j - 1].getStatus() == Status.LIVRE.name and j != 0:
                             return False
-                        if self.positions[i + 1][j].getStatus() == 'LIVRE':
+                        if self.positions[i + 1][j].getStatus() == Status.LIVRE.name:
                             return False
-                        if self.positions[i - 1][j].getStatus() == 'LIVRE' and i != 0:
+                        if self.positions[i - 1][j].getStatus() == Status.LIVRE.name and i != 0:
                             return False
-                        if self.positions[i][j + 1].getStatus() == 'OCUPADA_2' and self.posicaoSeguinteIsVazia(Location(i, j), Location(i, j + 1)):
+                        if self.positions[i][j + 1].getStatus() == Status.OCUPADA_2.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i, j + 1)):
                             return False
-                        if self.positions[i][j - 1].getStatus() == 'OCUPADA_2' and self.posicaoSeguinteIsVazia(Location(i, j), Location(i, j - 1)) and j != 0:
+                        if self.positions[i][j - 1].getStatus() == Status.OCUPADA_2.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i, j - 1)) and j != 0:
                             return False
-                        if self.positions[i + 1][j].getStatus() == 'OCUPADA_2' and self.posicaoSeguinteIsVazia(Location(i, j), Location(i + 1, j)):
+                        if self.positions[i + 1][j].getStatus() == Status.OCUPADA_2.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i + 1, j)):
                             return False
-                        if self.positions[i - 1][j].getStatus() == 'OCUPADA_2' and self.posicaoSeguinteIsVazia(Location(i, j), Location(i - 1, j)) and i != 0:
+                        if self.positions[i - 1][j].getStatus() == Status.OCUPADA_2.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i - 1, j)) and i != 0:
                             return False
                 if self.turnPlayer == 1:
                     if self.positions[i][j].getStatus() == 'OCUPADA_2':
-                        if self.positions[i][j + 1].getStatus() == 'LIVRE':
+                        if self.positions[i][j + 1].getStatus() == Status.LIVRE.name:
                             return False
-                        if self.positions[i][j - 1].getStatus() == 'LIVRE' and j != 0:
+                        if self.positions[i][j - 1].getStatus() == Status.LIVRE.name and j != 0:
                             return False
-                        if self.positions[i + 1][j].getStatus() == 'LIVRE':
+                        if self.positions[i + 1][j].getStatus() == Status.LIVRE.name:
                             return False
-                        if self.positions[i - 1][j].getStatus() == 'LIVRE' and i != 0:
+                        if self.positions[i - 1][j].getStatus() == Status.LIVRE.name and i != 0:
                             return False
-                        if self.positions[i][j + 1].getStatus() == 'OCUPADA_1' and self.posicaoSeguinteIsVazia(Location(i, j), Location(i, j + 1)):
+                        if self.positions[i][j + 1].getStatus() == Status.OCUPADA_1.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i, j + 1)):
                             return False
-                        if self.positions[i][j - 1].getStatus() == 'OCUPADA_1' and self.posicaoSeguinteIsVazia(Location(i, j), Location(i, j - 1)) and j != 0:
+                        if self.positions[i][j - 1].getStatus() == Status.OCUPADA_1.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i, j - 1)) and j != 0:
                             return False
-                        if self.positions[i + 1][j].getStatus() == 'OCUPADA_1' and self.posicaoSeguinteIsVazia(Location(i, j), Location(i + 1, j)):
+                        if self.positions[i + 1][j].getStatus() == Status.OCUPADA_1.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i + 1, j)):
                             return False
-                        if self.positions[i - 1][j].getStatus() == 'OCUPADA_1' and self.posicaoSeguinteIsVazia(Location(i, j), Location(i - 1, j)) and i != 0:
+                        if self.positions[i - 1][j].getStatus() == Status.OCUPADA_1.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i - 1, j)) and i != 0:
                             return False
         return True
 
     def validarSeVazio(self, selectedDestiny: Location) -> bool:
-        return self.positions[selectedDestiny.getLine()][selectedDestiny.getColumn()].getStatus() == 'LIVRE'
+        return self.positions[selectedDestiny.getLine()][selectedDestiny.getColumn()].getStatus() == Status.LIVRE.name
 
     def removerPeca(self, location: Location) -> _void:
         self.positions[location.getLine()][location.getColumn()].setStatus('LIVRE')
@@ -241,9 +242,9 @@ class Board:
     
     def validarReserva(self, player: int, posicao: Location):
         if player == 1:
-            return self.player1.getReservas() > 0 and self.player1.piecesOnBoard < 4 and self.positions[posicao.getLine()][posicao.getColumn()].getStatus() == 'RESERVA_1'
+            return self.player1.getReservas() > 0 and self.player1.piecesOnBoard < 4 and self.positions[posicao.getLine()][posicao.getColumn()].getStatus() == Status.RESERVA_1.name
         if player == 2:
-            return self.player2.getReservas() > 0 and self.player2.piecesOnBoard < 4 and self.positions[posicao.getLine()][posicao.getColumn()].getStatus() == 'RESERVA_2'
+            return self.player2.getReservas() > 0 and self.player2.piecesOnBoard < 4 and self.positions[posicao.getLine()][posicao.getColumn()].getStatus() == Status.RESERVA_2.name
 
     def verificarVencedor(self) -> bool:
         pecasOpositor = self.getUserPecasOponentes()
