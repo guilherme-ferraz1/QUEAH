@@ -83,6 +83,11 @@ class PlayerInterface:
                     if isVazio == True:
                         self.board.removerPeca(self.board.selectedLocation)
                         self.board.movimentarPeca(self.board.selectedDestiny)
+                        # CASO DE USO VERIFICAR VENCEDOR APÓS A AÇÃO DO JOGADOR
+                        temVencedor = self.board.verificarVencedor()
+                        if temVencedor == True:
+                            self.iniciarInterfaceUsuario()
+                            return
                         self.atualizaInterface()
                         self.board.limparPosicoesSelecionadas()
                     else:
@@ -99,14 +104,13 @@ class PlayerInterface:
                                 self.board.removerPeca(self.board.selectedLocation)
                                 self.board.removerPeca(self.board.selectedDestiny)
                                 self.board.movimentarPecaAdjacente(self.board.selectedLocation, self.board.selectedDestiny)
+                                # CASO DE USO VERIFICAR VENCEDOR APÓS A AÇÃO DO JOGADOR
+                                temVencedor = self.board.verificarVencedor()
+                                if temVencedor == True:
+                                    self.iniciarInterfaceUsuario()
+                                    return
                                 self.atualizaInterface()
                                 self.board.limparPosicoesSelecionadas()
-                # CASO DE USO VERIFICAR VENCEDOR APÓS A AÇÃO DO JOGADOR
-                    temVencedor = self.board.verificarVencedor()
-                    if temVencedor == True:
-                        self.iniciarInterfaceUsuario()
-                        return
-                    self.atualizaInterface()
 
     def clickReservas(self, linha, coluna):
         # CASO DE USO ADICIONAR PEÇA
