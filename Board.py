@@ -162,37 +162,37 @@ class Board:
             for j in range(5):
                 if self.turnPlayer == 2:
                     if self.positions[i][j].getStatus() == 'OCUPADA_1':
-                        if self.positions[i][j + 1].getStatus() == Status.LIVRE.name:
+                        if j < 4 and self.positions[i][j + 1].getStatus() == Status.LIVRE.name:
                             return False
                         if self.positions[i][j - 1].getStatus() == Status.LIVRE.name and j != 0:
                             return False
-                        if self.positions[i + 1][j].getStatus() == Status.LIVRE.name:
+                        if i < 4 and self.positions[i + 1][j].getStatus() == Status.LIVRE.name:
                             return False
                         if self.positions[i - 1][j].getStatus() == Status.LIVRE.name and i != 0:
                             return False
-                        if self.positions[i][j + 1].getStatus() == Status.OCUPADA_2.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i, j + 1)):
+                        if j < 4 and self.positions[i][j + 1].getStatus() == Status.OCUPADA_2.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i, j + 1)):
                             return False
                         if self.positions[i][j - 1].getStatus() == Status.OCUPADA_2.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i, j - 1)) and j != 0:
                             return False
-                        if self.positions[i + 1][j].getStatus() == Status.OCUPADA_2.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i + 1, j)):
+                        if i < 4 and self.positions[i + 1][j].getStatus() == Status.OCUPADA_2.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i + 1, j)):
                             return False
                         if self.positions[i - 1][j].getStatus() == Status.OCUPADA_2.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i - 1, j)) and i != 0:
                             return False
                 if self.turnPlayer == 1:
                     if self.positions[i][j].getStatus() == 'OCUPADA_2':
-                        if self.positions[i][j + 1].getStatus() == Status.LIVRE.name:
+                        if j < 4 and self.positions[i][j + 1].getStatus() == Status.LIVRE.name:
                             return False
                         if self.positions[i][j - 1].getStatus() == Status.LIVRE.name and j != 0:
                             return False
-                        if self.positions[i + 1][j].getStatus() == Status.LIVRE.name:
+                        if i < 4 and self.positions[i + 1][j].getStatus() == Status.LIVRE.name:
                             return False
                         if self.positions[i - 1][j].getStatus() == Status.LIVRE.name and i != 0:
                             return False
-                        if self.positions[i][j + 1].getStatus() == Status.OCUPADA_1.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i, j + 1)):
+                        if j < 4 and self.positions[i][j + 1].getStatus() == Status.OCUPADA_1.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i, j + 1)):
                             return False
                         if self.positions[i][j - 1].getStatus() == Status.OCUPADA_1.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i, j - 1)) and j != 0:
                             return False
-                        if self.positions[i + 1][j].getStatus() == Status.OCUPADA_1.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i + 1, j)):
+                        if i < 4 and self.positions[i + 1][j].getStatus() == Status.OCUPADA_1.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i + 1, j)):
                             return False
                         if self.positions[i - 1][j].getStatus() == Status.OCUPADA_1.name and self.posicaoSeguinteIsVazia(Location(i, j), Location(i - 1, j)) and i != 0:
                             return False
