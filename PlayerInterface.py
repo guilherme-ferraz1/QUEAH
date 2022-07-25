@@ -4,6 +4,7 @@ from Board import Board
 from Location import Location
 from inspect import _void
 from Position import Position
+from Status import Status
 
 LARGEFONT = ("Verdana", 35)
 MEDIUMFONT = ("Verdana", 12)
@@ -20,11 +21,11 @@ class PlayerInterface:
         self.board = Board()
         self.isAdicionarPeca = False
         self.posicoesIniciais = [
-            [Position('RESERVA_1'), Position('INATIVA'), Position('LIVRE'), Position('INATIVA'), Position('INATIVA')],
-            [Position('INATIVA'), Position('LIVRE'), Position('OCUPADA_2'), Position('OCUPADA_2'), Position('INATIVA')],
-            [Position('OCUPADA_1'), Position('OCUPADA_1'), Position('LIVRE'), Position('OCUPADA_2'), Position('OCUPADA_2')],
-            [Position('INATIVA'), Position('OCUPADA_1'), Position('OCUPADA_1'), Position('LIVRE'), Position('INATIVA')],
-            [Position('INATIVA'), Position('INATIVA'), Position('LIVRE'), Position('INATIVA'), Position('RESERVA_2')]
+            [Position(Status.RESERVA_1.name), Position(Status.INATIVA.name), Position(Status.LIVRE.name), Position(Status.INATIVA.name), Position(Status.INATIVA.name)],
+            [Position(Status.INATIVA.name), Position(Status.LIVRE.name), Position(Status.OCUPADA_2.name), Position(Status.OCUPADA_2.name), Position(Status.INATIVA.name)],
+            [Position(Status.OCUPADA_1.name), Position(Status.OCUPADA_1.name), Position(Status.LIVRE.name), Position(Status.OCUPADA_2.name), Position(Status.OCUPADA_2.name)],
+            [Position(Status.INATIVA.name), Position(Status.OCUPADA_1.name), Position(Status.OCUPADA_1.name), Position(Status.LIVRE.name), Position(Status.INATIVA.name)],
+            [Position(Status.INATIVA.name), Position(Status.INATIVA.name), Position(Status.LIVRE.name), Position(Status.INATIVA.name), Position(Status.RESERVA_2.name)]
         ]
 
         fotoJogador1 = Label(master, image=self.fotoJogador1)
@@ -137,28 +138,28 @@ class PlayerInterface:
 
         for i in range(5):
             for j in range(5):
-                if self.posicoesIniciais[i][j].getStatus() == 'OCUPADA_1':
+                if self.posicoesIniciais[i][j].getStatus() == Status.OCUPADA_1.name:
                     peca = Label(self.tabuleiro, image=self.pinoAzul)
                     peca.place(x=80 * j + 100, y=80 * i + 120)
                     peca.bind("<Button-1>", lambda event, linha=i, coluna=j: self.clickTabuleiro(linha, coluna))
                     peca.image = self.pinoAzul
-                if self.posicoesIniciais[i][j].getStatus() == 'OCUPADA_2':
+                if self.posicoesIniciais[i][j].getStatus() == Status.OCUPADA_2.name:
                     peca = Label(self.tabuleiro, image=self.pinoVermelho)
                     peca.place(x=80 * j + 100, y=80 * i + 120)
                     peca.bind("<Button-1>", lambda event, linha=i, coluna=j: self.clickTabuleiro(linha, coluna))
                     peca.image = self.pinoVermelho
-                if self.posicoesIniciais[i][j].getStatus() == 'LIVRE':
+                if self.posicoesIniciais[i][j].getStatus() == Status.LIVRE.name:
                     peca = Label(self.tabuleiro, image=self.casaTabuleiro)
                     peca.place(x=80 * j + 100, y=80 * i + 120)
                     peca.bind("<Button-1>", lambda event, linha=i, coluna=j: self.clickTabuleiro(linha, coluna))
                     peca.image = self.casaTabuleiro
                     peca = Label(self.tabuleiro, image=self.casaTabuleiro)
-                if self.posicoesIniciais[i][j].getStatus() == 'RESERVA_1' and self.board.player1.getReservas() > 0:
+                if self.posicoesIniciais[i][j].getStatus() == Status.RESERVA_1.name and self.board.player1.getReservas() > 0:
                     peca = Label(self.tabuleiro, image=self.pinoAzul)
                     peca.place(x=80 * j + 100, y=80 * i + 120)
                     peca.bind("<Button-1>", lambda event, linha=i, coluna=j: self.clickReservas(linha, coluna))
                     peca.image = self.pinoAzul
-                if self.posicoesIniciais[i][j].getStatus() == 'RESERVA_2' and self.board.player2.getReservas() > 0:
+                if self.posicoesIniciais[i][j].getStatus() == Status.RESERVA_2.name and self.board.player2.getReservas() > 0:
                     peca = Label(self.tabuleiro, image=self.pinoVermelho)
                     peca.place(x=80 * j + 100, y=80 * i + 120)
                     peca.bind("<Button-1>", lambda event, linha=i, coluna=j: self.clickReservas(linha, coluna))
@@ -176,29 +177,29 @@ class PlayerInterface:
         
         for i in range(5):
             for j in range(5):
-                if self.board.positions[i][j].getStatus() == 'OCUPADA_1':
+                if self.board.positions[i][j].getStatus() == Status.OCUPADA_1.name:
                     peca = Label(self.tabuleiro, image=self.pinoAzul)
                     peca.place(x=80 * j + 100, y=80 * i + 120)
                     peca.bind("<Button-1>", lambda event, linha=i, coluna=j: self.clickTabuleiro(linha, coluna))
                     peca.image = self.pinoAzul
-                if self.board.positions[i][j].getStatus() == 'OCUPADA_2':
+                if self.board.positions[i][j].getStatus() == Status.OCUPADA_2.name:
                     peca = Label(self.tabuleiro, image=self.pinoVermelho)
                     peca.place(x=80 * j + 100, y=80 * i + 120)
                     peca.bind("<Button-1>", lambda event, linha=i, coluna=j: self.clickTabuleiro(linha, coluna))
                     peca.image = self.pinoVermelho
-                if self.board.positions[i][j].getStatus() == 'LIVRE':
+                if self.board.positions[i][j].getStatus() == Status.LIVRE.name:
                     peca = Label(self.tabuleiro, image=self.casaTabuleiro)
                     peca.place(x=80 * j + 100, y=80 * i + 120)
                     peca.bind("<Button-1>", lambda event, linha=i, coluna=j: self.clickTabuleiro(linha, coluna))
                     peca.image = self.casaTabuleiro
                     peca = Label(self.tabuleiro, image=self.casaTabuleiro)
-                if self.board.positions[i][j].getStatus() == 'RESERVA_1' and self.board.player1.getReservas() > 0:
+                if self.board.positions[i][j].getStatus() == Status.RESERVA_1.name and self.board.player1.getReservas() > 0:
                     peca = Label(self.tabuleiro, image=self.pinoAzul)
                     peca.place(x=80 * j + 100, y=80 * i + 120)
                     pos = [i,j]
                     peca.bind("<Button-1>", lambda event, linha=i, coluna=j: self.clickReservas(linha, coluna))
                     peca.image = self.pinoAzul
-                if self.board.positions[i][j].getStatus() == 'RESERVA_2' and self.board.player2.getReservas() > 0:
+                if self.board.positions[i][j].getStatus() == Status.RESERVA_2.name and self.board.player2.getReservas() > 0:
                     peca = Label(self.tabuleiro, image=self.pinoVermelho)
                     peca.place(x=80 * j + 100, y=80 * i + 120)
                     peca.bind("<Button-1>", lambda event, linha=i, coluna=j: self.clickReservas(linha, coluna))
